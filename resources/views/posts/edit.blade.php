@@ -11,7 +11,9 @@
 		<div class="max-w-7xl mx-auto sm:py-6 lg:px-8">
 			<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 				<div class="p-6 text-gray-900">
-
+					<p class="text-center text-2xl font-bold">
+						<b"> Post Title ({{$post->title}}) edit</b>
+					</p><hr><br>
 				    {{-- ✅ Success message after update --}}
 				    @if(session('success'))
 				        <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-800 rounded">

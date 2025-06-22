@@ -12,12 +12,20 @@
 -->
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('posts')">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('posts')" :active="request()->routeIs('posts')">
                         {{ __('My Post') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('posts.all')">
+
+                    <x-nav-link :href="route('posts.all')" :active="request()->routeIs('posts.all')">
                         {{ __('View all Posts') }}
                     </x-nav-link>
+
+                    <!-- <x-nav-link :href="route('api')" :active="request()->routeIs('api')">
+                        {{ __('API testing') }}
+                    </x-nav-link> -->
                 </div>
             </div>
 

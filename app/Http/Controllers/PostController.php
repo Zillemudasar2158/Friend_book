@@ -15,6 +15,11 @@ class PostController extends Controller
     {
     	$user = Auth::user()->load('posts');
     	return view('posts.index',compact('user'));
+    }    
+    public function allPosts()
+    {
+        $posts = Post::with(['user', 'likes'])->latest()->paginate(20);
+        return view('posts.all', compact('posts'));
     }
     public function create()
     {
@@ -44,6 +49,7 @@ class PostController extends Controller
             'image' => $imageName
         ]);
 
+        //event call
         PostCreated::dispatch($post);
 
         return redirect()->route('posts')->with('success', 'Post created successfully!');
@@ -80,12 +86,6 @@ class PostController extends Controller
             'message' => 'Unliked successfully',
             'likes_count' => $post->likes()->where('type', 'like')->count()
         ]);
-    }
-
-    public function allPosts()
-    {
-        $posts = Post::with(['user', 'likes'])->latest()->paginate(9);
-        return view('posts.all', compact('posts'));
     }
     public function edit($id)
     {
@@ -127,7 +127,30 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        return view('posts.postshow', compact('post'));
+        if ($post) {
+            return view('posts.postshow', compact('post'));
+        }
+        else{
+            return view('posts');
+        }
+        
     }
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search'=>'required',
+        ],
+        [
+            'search'=>'Atleast one character is required'
+        ]);
 
+        $search = $request->search;
+        $id=auth()->user()->id;
+        $type = $request->type;                
+
+        $posts = Post::with(['user', 'likes'])
+                    ->searchBy($type, $search,$id)->paginate(2);
+
+        return view('posts.all',['posts' => $posts,'search'=>$search]);
+    }
 }

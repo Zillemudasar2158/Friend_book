@@ -23,6 +23,33 @@ class Post extends Model
 			get: fn($value)=>ucwords($value)
 		);
 	}
+	protected function body():Attribute
+	{
+		return Attribute::make(
+			get: fn($value)=>ucfirst($value)
+		);
+	}
+	public function scopeSearchBy($query, $type, $search,$id)
+	{
+		if ($type==='title1') 
+		{
+			return $query->where([
+				['user_id','=',$id],
+				['title','like',"%$search%"]
+			]);
+		}
+	    elseif ($type === 'title') {
+	        return $query->where('title', 'like', "%$search%");
+	    }
+
+	    elseif ($type === 'name') {
+	        return $query->whereHas('user', function ($q) use ($search) {
+	            $q->where('name', 'like', "%$search%");
+	        });
+	    }
+	    return $query;
+	}
+
 	public function user()
 	{
 	    return $this->belongsTo(User::class);

@@ -12,7 +12,9 @@
     </x-slot>
 <x-message />
     <div class="py-8 flex justify-center">
+        
         <div class="w-full max-w-[600px]">
+            @include('posts.search')
             @if($user && $user->posts->count())
                 <div class="flex flex-col gap-6">
                     @foreach($user->posts as $post)

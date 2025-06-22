@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     attachEventListeners(); // Initial call
 });
 
+//delete function
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.delete-btn').forEach(function (button) {
         button.addEventListener('click', function (e) {
