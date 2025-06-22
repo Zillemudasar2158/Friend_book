@@ -6,13 +6,15 @@
 
 ## 🚀 Features
 
-- User Registration and Login (Auth)
-- Create, Update, Delete Posts
-- View All Users' Posts
-- Like/Unlike Posts
-- Event & Listener on Post Creation
-- Flash Messages for success/errors
-- Responsive Blade UI with Tailwind CSS
+- ✅ User Registration and Login (Authentication)
+- 📝 Create, Update, Delete Posts
+- 🌐 View All Users' Posts
+- ❤️ Like/Unlike Posts
+- 🔎 Search posts by title, user or author
+- ⚡ Event & Listener on Post Creation
+- 🔔 Flash Messages for success/errors
+- 💻 Responsive Blade UI with Tailwind CSS
+
 
 ---
 
@@ -32,7 +34,7 @@
 ## 📂 Project Setup
 
 ```bash
-git clone https://github.com/yourusername/friend_book.git
+git clone https://github.com/Zillemudasar2158/friend_book.git
 cd friend_book
 composer install
 cp .env.example .env
