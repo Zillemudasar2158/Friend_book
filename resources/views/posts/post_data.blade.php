@@ -1,5 +1,22 @@
 <div>
-    <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ $post->title }}</h3>
+    @php
+        $search = request('search');
+        $type = request('type');
+    
+
+        $title = $post->title;
+        if ($type === 'title' && !empty($search) || $type === 'title1' && !empty($search)) 
+        {
+            $highlightedTitle = str_ireplace($search, "<span class='bg-green-900 text-white font-bold'>{$search}</span>", $title);
+        } else {
+            $highlightedTitle = $title;
+        }
+    @endphp
+
+    <h3 class="text-lg font-semibold text-gray-900 mb-3">{!! $highlightedTitle !!}</h3>
+
+
+    
     <hr class="mb-3">
 
     @if($post->image)
@@ -19,7 +36,16 @@
     </p>
     <br><hr>
     <div class="text-xs text-gray-500">
-        upload by: <span class="font-medium">{{ $post->user->name }}</span><br>
+    @php
+        $author = $post->user->name;
+        if ($type === 'name' && !empty($search)) {
+            $highlightedAuthor = str_ireplace($search, "<span class='bg-green-900 text-white font-bold'>{$search}</span>", $author);
+        } else {
+            $highlightedAuthor = $author;
+        }
+    @endphp
+
+    <p class="text-sm text-gray-600">Upload By:<b> {!! $highlightedAuthor !!}</b></p>
         post upload: {{ \Carbon\Carbon::parse($post->created_at)->format('d M, Y') }}
     </div>
 </div>

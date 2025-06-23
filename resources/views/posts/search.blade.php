@@ -1,11 +1,10 @@
 <div class="my-4">
     <form method="GET" action="{{ route('search') }}" class="flex flex-wrap items-center gap-3">
-        <select name="type" class="border border-gray-300 shadow-sm rounded-lg px-4 py-1">
         	@if(request()->routeIs('posts') || request('type') == 'title1')
-                <option value="title1">Serach By Author post title</option>
+            <input type="hidden" name="type" value="title1">
+                <p>Search my Post Title</p>
             @else
-            {{-- Option hidden, show a message --}}
-            {{-- Note: <p> outside <select>, can't go inside --}}
+            <select name="type" class="border border-gray-300 shadow-sm rounded-lg px-4 py-1">
             <option value="title" {{ request('type') == 'title' ? 'selected' : '' }}>Search by post title</option>
             <option value="name" {{ request('type') == 'name' ? 'selected' : '' }}>Search by upload user</option>     
             @endif       

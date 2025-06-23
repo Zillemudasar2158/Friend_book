@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\like;
+use App\Models\Reaction;
 use App\Events\PostCreated;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -149,8 +150,9 @@ class PostController extends Controller
         $type = $request->type;                
 
         $posts = Post::with(['user', 'likes'])
-                    ->searchBy($type, $search,$id)->paginate(2);
+                    ->searchBy($type, $search,$id)->paginate(20);
 
-        return view('posts.all',['posts' => $posts,'search'=>$search]);
+        return view('posts.all',['posts' => $posts,'search'=>$search,'type'=>$type]);
     }
+
 }

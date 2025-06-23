@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\apicontroller;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,11 +35,15 @@ Route::middleware('auth')->group(function () {
 	    //like post route
 	    Route::post('/posts/{id}/like','like')->name('posts.like');
 		Route::post('/posts/{id}/unlike','unlike')->name('posts.unlike');
-    });
-	
 
+		//reaction add
+		Route::get('/reaction','reactions')->name('posts.reaction');
+		Route::post('/posts/{id}/react','react')->name('posts.react');
+    });
+		
 	// api testing http
 	Route::get('/api',[apicontroller::class,'index'])->name('api');
 });
-
+		//Email checking
+	Route::get('sendemail',[MailController::class,'sendemail']);
 require __DIR__.'/auth.php';
